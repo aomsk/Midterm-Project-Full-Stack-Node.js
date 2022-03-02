@@ -1,7 +1,7 @@
-import Navbar from '../components/NavBar'
+import Navbar from '../components/navbar'
 import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
 import { config } from "@fortawesome/fontawesome-svg-core";
-import { TagContext } from '../contexts/TagContext';
+import { TagContext } from '../../contexts/TagContext';
 import { useState } from 'react';
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 // import '../styles/scss/styles.scss'
