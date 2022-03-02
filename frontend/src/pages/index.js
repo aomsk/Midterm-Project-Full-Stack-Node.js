@@ -1,6 +1,6 @@
-import Card_Post from '../components/Card_Post'
-import Categories from '../components/Categories'
-import Tag from '../components/Tag'
+import Card_Post from '../components/card_post'
+import Categories from '../components/categories'
+import Tag from '../components/tag'
 import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
