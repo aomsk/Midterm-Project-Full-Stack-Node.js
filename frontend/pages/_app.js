@@ -1,4 +1,4 @@
-import Navbar from '../components/NavBar'
+import Navbar from '../components/navbar'
 import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { TagContext } from '../contexts/TagContext';
