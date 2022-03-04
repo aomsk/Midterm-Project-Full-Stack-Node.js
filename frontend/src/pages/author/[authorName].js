@@ -1,11 +1,11 @@
 import { Container, Row, Col } from 'react-bootstrap'
 
-const commentId = () => {
+const Author = () => {
     return (
         <Container>
-            <h3>Comment ID Page</h3>
+            <h1>Hello Author Page</h1>
         </Container>
     )
 }
 
-export default commentId
+export default Author

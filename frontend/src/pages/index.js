@@ -5,37 +5,37 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
 export async function getStaticProps() {
-    const responsse_posts = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/posts')
+    const responsse_posts = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/posts', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
     const data_posts = await responsse_posts.json()
 
-    const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags')
-    const data_tags = await responsse_tags.json()
+    // const author = data_posts.map((post) => {
+    //     return (
+    //         {
+    //             "link_author" : post._links.author[0].href,
+    //             "author_id" : post.author
+    //         }
+    //     )
+    // })
 
-    console.log('fecth data success')
+    const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_tags = await responsse_tags.json()
 
     return {
         props: {
             posts: data_posts,
-            tags: data_tags
+            tags: data_tags,
         }
     }
 }
 
 const Home = ({ posts, tags }) => {
     return (
-        // <div className="container">
-        //     <div className='columns'>
-        //         <div className='column'>
-        //             <Tag tags={ tags }/>
-        //         </div>
-        //         <div className='column'>
-        //             <Categories />
-        //         </div>
-        //     </div>
-        //     <div>
-        //         <Card_Post posts={ posts }/>
-        //     </div>
-        // </div>
         <Container>
             <Head>
                 <title>Home</title>

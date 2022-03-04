@@ -1,64 +1,48 @@
+export async function getStaticProps() {
+    const responsse = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/comments`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data = await responsse.json()
+
+    const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_tags = await responsse_tags.json()
+
+    return {
+        props: {
+            comments: data,
+            tags: data_tags, //fecth for navbar navTags
+        }
+    }
+}
+
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-const allComments = () => {
-    const [dataComments, setDataComments] = useState(null)
-
-    useEffect(() => {
-        async function fetchCommentsAPI() {
-            let response = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/comments')
-            response = await response.json()
-            setDataComments(response)
-            console.log(response)
-        }
-        fetchCommentsAPI()
-    }, [])
+const allComments = (comments) => {
+    console.log('comments: ', comments.comments);
 
     return (
         <Container>
+            <h2>Create Comment</h2>
+            <span></span>
+            <input className="form-control" type="text" placeholder="comment"></input>
+            <input className="form-control" type="text" placeholder="author"></input>
             <h3>All Comments</h3>
-            {/* <Row>
-                <Col lg={3} style={{ backgroundColor: 'cyan' }}>
-                    {
-                        !!dataComments &&
-                        dataComments.map((data, index) => {
-                            return (
-                                <div key={index}>
-                                    <h3>Comment ID : {data.id}</h3>
-                                    <p>From Post : {data.post}</p>
-                                    <Link href={'/comments/' + data.author_name}>
-                                        <a style={{ color: 'black' }}>{data.author_name}</a>
-                                    </Link>
-                                </div>
-                            )
-                        })
-                    }
-                </Col>
-                <Col lg={9} style={{ backgroundColor: 'pink' }}>
-                    {
-                        !!dataComments &&
-                        dataComments.map((data, index) => {
-                            return (
-                                <div key={index}>
-                                    <h6>Author Name : {data.author_name}</h6>
-                                    <div dangerouslySetInnerHTML={{ __html: data.content.rendered }}></div>
-                                </div>
-                            )
-                        })
-                    }
-                </Col>
-            </Row> */}
             <Row>
                 <Col>
                     {
-                        !!dataComments &&
-                        dataComments.map((data, index) => {
+                        comments.comments.map((comment, index) => {
                             return (
-                                <Card className='mb-2'>
+                                <Card className='mb-2' key={index}>
                                     <Card.Body>
-                                        <Card.Title>{data.author_name} From Post { data.post }</Card.Title>
-                                        <Card.Text>Published on {data.date}</Card.Text>
+                                        <Card.Title>{comment.author_name} From Post {comment.post}</Card.Title>
+                                        <Card.Text>Published on {comment.date}</Card.Text>
+                                        <div dangerouslySetInnerHTML={{ __html: comment.content.rendered }}></div>
                                     </Card.Body>
                                 </Card>
                             )
