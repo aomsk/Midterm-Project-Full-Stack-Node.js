@@ -56,26 +56,27 @@ const PostId = ({ post }) => {
             //   });
 
 
-            // try {
-            //         const response = await fetch(post._links.author[0].href, {
-            //         method: 'GET',
-            //         mode: 'cors',
-            //         headers: {
-            //             'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==',
-            //             'Content-Type': 'application/json',
-            //         }
-            //     })
+            try {
+                    const response = await fetch(post._links.author[0].href, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==',
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                })
 
-            //     if (!response.ok) {
-            //         throw new Error(`Error! status: ${response.status}`)
-            //     }
+                if (!response.ok) {
+                    throw new Error(`Error! status: ${response.status}`)
+                }
 
-            //     response = await response.json()
-            //     setDataAuthor(response)
-            //     console.log(response)
-            // } catch (err) {
-            //     console.log(err)
-            // }
+                response = await response.json()
+                setDataAuthor(response)
+                console.log(response)
+            } catch (err) {
+                console.log(err)
+            }
         }
         fetchDataAuthor()
     }, [])
