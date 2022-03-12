@@ -1,5 +1,8 @@
 export async function getStaticPaths() {
-    const response = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags')
+    const response = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
     const data = await response.json()
     const paths = data.map((tag) => {
         return {
@@ -15,8 +18,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context
-    const responsse = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/tags/${params.tagId}`)
-    const responsse_post = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/posts/`)
+    const responsse = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/tags/${params.tagId}`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const responsse_post = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/posts/`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
     const data = await responsse.json()
     const data_post = await responsse_post.json()
 
@@ -28,8 +37,9 @@ export async function getStaticProps(context) {
     }
 }
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import Head from 'next/head'
+import Link from 'next/link'
 
 const TagId = ({ tag, posts }) => {
     const list = []
@@ -54,28 +64,6 @@ const TagId = ({ tag, posts }) => {
     console.log('post_in_tag : ', post_in_tag)
 
     return (
-        // <div className="container">
-        //     <div className='columns is-multiline'>
-        //         <div className='column is-4'>
-        //             <p>Tag ID : {tag.id}</p>
-        //             <p>Tag Name : {tag.name}</p>
-        //             <p>Tag Count : {tag.count}</p>
-        //         </div>
-        //         <div className='column is-8'>
-        //             {
-        //                 post_in_tag.map((post, index) => {
-        //                     return (
-        //                         <div key={index}>
-        //                             <p className="has-text-weight-bold">Post ID : { post.id }</p>
-        //                             <p>Post Name : { post.title.rendered }</p>
-        //                             <hr className="dropdown-divider"></hr>
-        //                         </div>
-        //                     )
-        //                 })
-        //             }
-        //         </div>
-        //     </div>
-        // </div>
         <Container>
             <Head>
                 <title>{ tag.name }</title>
@@ -91,8 +79,13 @@ const TagId = ({ tag, posts }) => {
                         post_in_tag.map((post, index) => {
                             return (
                                 <div key={index}>
-                                    <h4>Post ID : {post.id} </h4>
-                                    <h6>Post Name : {post.title.rendered} </h6>
+                                    <h3>{post.title.rendered} </h3>
+                                    <h6>Published on { post.date }</h6>
+                                    {/* <h6>Post ID : {post.id} </h6> */}
+                                    <Link href={'/posts/' + post.id}>
+                                        {/* <Button style={{ backgroundColor: '#AF7AC5', color: '#fff', border: 1 }}>Continue reading</Button> */}
+                                        <button type="button" class="btn btn-outline-info">Continue reading</button>
+                                    </Link>
                                     <hr></hr>
                                 </div>
                             )
