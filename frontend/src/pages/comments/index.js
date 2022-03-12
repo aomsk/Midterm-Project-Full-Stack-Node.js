@@ -19,30 +19,38 @@ export async function getStaticProps() {
     }
 }
 
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Head from 'next/head'
+import Input_Comment from '../../components/input_comment'
 
 const allComments = (comments) => {
     console.log('comments: ', comments.comments);
 
     return (
         <Container>
-            <h2>Create Comment</h2>
-            <span></span>
-            <input className="form-control" type="text" placeholder="comment"></input>
-            <input className="form-control" type="text" placeholder="author"></input>
-            <h3>All Comments</h3>
+            <Head>
+                <title>Comments</title>
+            </Head>
+            {/* <h2>Create Comment</h2>
+            <Input_Comment /> */}
+            <h3>All Comments ({ comments.comments.length })</h3>
             <Row>
                 <Col>
                     {
                         comments.comments.map((comment, index) => {
+                            let comment_date = new Date(comment.date_gmt).toDateString()
+                            let local_time = new Date(comment.date_gmt).toLocaleTimeString()
                             return (
                                 <Card className='mb-2' key={index}>
                                     <Card.Body>
                                         <Card.Title>{comment.author_name} From Post {comment.post}</Card.Title>
-                                        <Card.Text>Published on {comment.date}</Card.Text>
+                                        <Card.Text>Published on {comment_date} | {local_time}</Card.Text>
                                         <div dangerouslySetInnerHTML={{ __html: comment.content.rendered }}></div>
+                                        <Link href={'/posts/' + comment.post}>
+                                            <div type='button' className='btn btn-outline-primary' variant="primary">Go To Post</div>
+                                        </Link>
                                     </Card.Body>
                                 </Card>
                             )

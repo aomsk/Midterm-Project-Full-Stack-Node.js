@@ -1,6 +1,6 @@
 import Card_Post from '../components/card_post'
-import Categories from '../components/categories'
-import Tag from '../components/tag'
+// import Categories from '../components/categories'
+// import Tag from '../components/tag'
 import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
@@ -10,15 +10,6 @@ export async function getStaticProps() {
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
     })
     const data_posts = await responsse_posts.json()
-
-    // const author = data_posts.map((post) => {
-    //     return (
-    //         {
-    //             "link_author" : post._links.author[0].href,
-    //             "author_id" : post.author
-    //         }
-    //     )
-    // })
 
     const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
         method: 'GET',
@@ -40,14 +31,14 @@ const Home = ({ posts, tags }) => {
             <Head>
                 <title>Home</title>
             </Head>
-            <Row>
+            {/* <Row>
                 <Col>
                     <Tag tags={tags} />
                 </Col>
                 <Col>
                     <Categories />
                 </Col>
-            </Row>
+            </Row> */}
             <Row>
                 <Card_Post posts={posts} />
             </Row>
