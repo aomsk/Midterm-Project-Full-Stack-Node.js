@@ -84,7 +84,7 @@ const TagId = ({ tag, posts }) => {
                                     {/* <h6>Post ID : {post.id} </h6> */}
                                     <Link href={'/posts/' + post.id}>
                                         {/* <Button style={{ backgroundColor: '#AF7AC5', color: '#fff', border: 1 }}>Continue reading</Button> */}
-                                        <button type="button" class="btn btn-outline-info">Continue reading</button>
+                                        <button type="button" className="btn btn-outline-info">Continue reading</button>
                                     </Link>
                                     <hr></hr>
                                 </div>
