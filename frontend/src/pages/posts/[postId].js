@@ -90,7 +90,6 @@ const PostId = ({ post, authorData, data_comments, ipAddress }) => {
                         <h6>Tag : {post.tags}</h6>
                         <h6>Categories : {post.categories}</h6>
                         <div dangerouslySetInnerHTML={{ __html: post.content.rendered }}></div>
-                        {/* <hr></hr> */}
                         <Card_Comment post={post} data_comments={data_comments} />
                         <Input_Comment post={post} data_comments={data_comments} ipAddress={ipAddress} />
                     </div>
