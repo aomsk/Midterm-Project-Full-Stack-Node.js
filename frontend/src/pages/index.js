@@ -1,11 +1,7 @@
 import Card_Post from '../components/card_post'
-<<<<<<< HEAD:frontend/src/pages/index.js
 import Categories from '../components/categories'
 import Tag from '../components/tag'
-=======
-// import Categories from '../components/categories'
-// import Tag from '../components/tag'
->>>>>>> dev:frontend/pages/index.js
+
 import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
