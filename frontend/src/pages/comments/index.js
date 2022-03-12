@@ -20,45 +20,43 @@ export async function getStaticProps() {
 }
 
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import Input_Comment from '../../components/input_comment'
 
 const allComments = (comments) => {
     console.log('comments: ', comments.comments);
 
     return (
-        <Container>
+        <div className='container'>
             <Head>
                 <title>Comments</title>
             </Head>
             {/* <h2>Create Comment</h2>
             <Input_Comment /> */}
             <h3>All Comments ({ comments.comments.length })</h3>
-            <Row>
-                <Col>
+            <div className='row'>
+                <div className='col'>
                     {
                         comments.comments.map((comment, index) => {
                             let comment_date = new Date(comment.date_gmt).toDateString()
                             let local_time = new Date(comment.date_gmt).toLocaleTimeString()
                             return (
-                                <Card className='mb-2' key={index}>
-                                    <Card.Body>
-                                        <Card.Title>{comment.author_name} From Post {comment.post}</Card.Title>
-                                        <Card.Text>Published on {comment_date} | {local_time}</Card.Text>
+                                <div className='card shadow p-3 mb-5 bg-white rounded mb-2' key={index}>
+                                    <div className='card-body'>
+                                        <h4 className='card-title'>{comment.author_name} From Post {comment.post}</h4>
+                                        <div className='card-text'>Published on {comment_date} | {local_time}</div>
                                         <div dangerouslySetInnerHTML={{ __html: comment.content.rendered }}></div>
                                         <Link href={'/posts/' + comment.post}>
-                                            <div type='button' className='btn btn-outline-primary' variant="primary">Go To Post</div>
+                                            <button type='button' className='btn btn-outline-primary'>Go To Post</button>
                                         </Link>
-                                    </Card.Body>
-                                </Card>
+                                    </div>
+                                </div>
                             )
                         })
                     }
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     )
 }
 export default allComments

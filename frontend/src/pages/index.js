@@ -1,6 +1,4 @@
 import Card_Post from '../components/card_post'
-// import Categories from '../components/categories'
-// import Tag from '../components/tag'
 import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
@@ -27,22 +25,14 @@ export async function getStaticProps() {
 
 const Home = ({ posts, tags }) => {
     return (
-        <Container>
+        <div className='container'>
             <Head>
                 <title>Home</title>
             </Head>
-            {/* <Row>
-                <Col>
-                    <Tag tags={tags} />
-                </Col>
-                <Col>
-                    <Categories />
-                </Col>
-            </Row> */}
-            <Row>
+            <div className='row'>
                 <Card_Post posts={posts} />
-            </Row>
-        </Container>
+            </div>
+        </div>
     )
 }
 

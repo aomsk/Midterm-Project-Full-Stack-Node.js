@@ -37,7 +37,6 @@ export async function getStaticProps(context) {
     }
 }
 
-import { Container, Row, Col, Button } from 'react-bootstrap'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -64,17 +63,17 @@ const TagId = ({ tag, posts }) => {
     console.log('post_in_tag : ', post_in_tag)
 
     return (
-        <Container>
+        <div className='container'>
             <Head>
                 <title>{ tag.name }</title>
             </Head>
-            <Row>
-                <Col lg={4}>
+            <div className='row'>
+                <div className='col col-lg-4'>
                     <h5>Tag ID : {tag.id}</h5>
                     <h5>Tag Name : {tag.name}</h5>
                     <h5>Tag Count : {tag.count}</h5>
-                </Col>
-                <Col lg={8}>
+                </div>
+                <div className='col col-lg-8'>
                     {
                         post_in_tag.map((post, index) => {
                             return (
@@ -91,9 +90,9 @@ const TagId = ({ tag, posts }) => {
                             )
                         })
                     }
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     )
 }
 

@@ -53,7 +53,6 @@ export async function getStaticProps(context) {
     }
 }
 
-import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 import Link from 'next/link'
 import Input_Comment from '../../components/input_comment'
@@ -72,12 +71,12 @@ const PostId = ({ post, authorData, data_comments, ipAddress }) => {
     let local_time = new Date(post.date_gmt).toLocaleTimeString()
 
     return (
-        <Container>
+        <div className='container'>
             <Head>
                 <title>{post.title.rendered}</title>
             </Head>
-            <Row>
-                <Col>
+            <div className='row'>
+                <div className='col'>
                     {/* <h4>Post ID : {post.id}</h4> */}
                     <div>
                         <h1>{post.title.rendered}</h1>
@@ -93,9 +92,9 @@ const PostId = ({ post, authorData, data_comments, ipAddress }) => {
                         <Card_Comment post={post} data_comments={data_comments} />
                         <Input_Comment post={post} data_comments={data_comments} ipAddress={ipAddress} />
                     </div>
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     )
 }
 

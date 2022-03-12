@@ -1,11 +1,9 @@
-import Image from "next/image"
 import Link from "next/link"
 import { useContext, useState } from "react"
 import { TagContext } from "../../contexts/TagContext"
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
 const NavBar = () => {
-    const [ isActive, setIsActive ] = useState(false)
     const navTags = useContext(TagContext)
     console.log('navTags : ', navTags)
     

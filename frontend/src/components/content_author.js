@@ -1,9 +1,8 @@
-import { Container, Row, Col, Button } from 'react-bootstrap'
 const Content_Author = () => {
     return (
-        <Container>
+        <div className='container'>
             <h1>Card Content Author</h1>
-        </Container>
+        </div>
     )
 }
 
