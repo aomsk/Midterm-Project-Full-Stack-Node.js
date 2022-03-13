@@ -80,6 +80,9 @@ const categoriesId = ({ posts, categories, tags }) => {
 
     return (
         <div className="container">
+            <Head>
+                <title>{categories.name}</title>
+            </Head>
             <div className="row">
                 <div className="col col-lg-12">
                     <h2>Categories : {categories.name} ({categories.count})</h2>
