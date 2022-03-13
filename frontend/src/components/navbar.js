@@ -24,7 +24,6 @@ const NavBar = () => {
                                 !!navTags &&
                                 navTags.map((item, index) => {
                                     return (
-                                        // <NavDropdown.Item key={index} href={'/tag/' + item.id}>{ item.name }</NavDropdown.Item>
                                         <Link key={index} href={'/tag/' + item.id} >
                                             <NavDropdown.Item href={'/tag/' + item.id}>{ item.name }</NavDropdown.Item> 
                                         </Link>
@@ -37,7 +36,6 @@ const NavBar = () => {
                                 !!navCategory &&
                                 navCategory.map((item, index) => {
                                     return (
-                                        // <NavDropdown.Item key={index} href={'/tag/' + item.id}>{ item.name }</NavDropdown.Item>
                                         <Link key={index} href={'/categories/' + item.id} >
                                             <NavDropdown.Item href={'/categories/' + item.id}>{ item.name }</NavDropdown.Item> 
                                         </Link>

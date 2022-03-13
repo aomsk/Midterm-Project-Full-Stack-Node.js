@@ -84,9 +84,6 @@ const TagId = ({ tag, posts, tags }) => {
                 <title>{ tag.name }</title>
             </Head>
             <div className='row'>
-                {/* <div className='col col-lg-4'>
-                    <h2>Tag : {tag.name} ({tag.count})</h2>
-                </div> */}
                 <div className='col col-lg-12'>
                 <h2>Tag : {tag.name} ({tag.count})</h2>
                     {
