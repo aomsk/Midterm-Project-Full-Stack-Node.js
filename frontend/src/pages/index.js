@@ -15,15 +15,23 @@ export async function getStaticProps() {
     })
     const data_tags = await responsse_tags.json()
 
+    //categories
+    const responsse_many_categories = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_many_categories = await responsse_many_categories.json()
+
     return {
         props: {
             posts: data_posts,
             tags: data_tags,
+            many_categories: data_many_categories,
         }
     }
 }
 
-const Home = ({ posts, tags }) => {
+const Home = ({ posts, tags, many_categories }) => {
     return (
         <div className='container'>
             <Head>

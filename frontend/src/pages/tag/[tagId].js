@@ -22,17 +22,33 @@ export async function getStaticProps(context) {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
     })
+    const data = await responsse.json()
+    
     const responsse_post = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/posts/`, {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
     })
-    const data = await responsse.json()
     const data_post = await responsse_post.json()
+
+    const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_tags = await responsse_tags.json()
+
+    //categories
+    const responsse_many_categories = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_many_categories = await responsse_many_categories.json()
 
     return {
         props: {
             tag: data,
-            posts: data_post
+            posts: data_post,
+            tags: data_tags, //fecth for navbar navTags
+            many_categories: data_many_categories, //fecth for navbar navCategory
         }
     }
 }
@@ -40,7 +56,7 @@ export async function getStaticProps(context) {
 import Head from 'next/head'
 import Link from 'next/link'
 
-const TagId = ({ tag, posts }) => {
+const TagId = ({ tag, posts, tags }) => {
     const list = []
     const post_tags_id = []
     const post_in_tag = []
@@ -68,24 +84,22 @@ const TagId = ({ tag, posts }) => {
                 <title>{ tag.name }</title>
             </Head>
             <div className='row'>
-                <div className='col col-lg-4'>
-                    <h5>Tag ID : {tag.id}</h5>
-                    <h5>Tag Name : {tag.name}</h5>
-                    <h5>Tag Count : {tag.count}</h5>
-                </div>
-                <div className='col col-lg-8'>
+                {/* <div className='col col-lg-4'>
+                    <h2>Tag : {tag.name} ({tag.count})</h2>
+                </div> */}
+                <div className='col col-lg-12'>
+                <h2>Tag : {tag.name} ({tag.count})</h2>
                     {
                         post_in_tag.map((post, index) => {
                             return (
-                                <div key={index}>
-                                    <h3>{post.title.rendered} </h3>
-                                    <h6>Published on { post.date }</h6>
-                                    {/* <h6>Post ID : {post.id} </h6> */}
-                                    <Link href={'/posts/' + post.id}>
-                                        {/* <Button style={{ backgroundColor: '#AF7AC5', color: '#fff', border: 1 }}>Continue reading</Button> */}
-                                        <button type="button" className="btn btn-outline-info">Continue reading</button>
-                                    </Link>
-                                    <hr></hr>
+                                <div className='card shadow p-3 mb-3 mt-3 bg-white rounded' key={index}>
+                                    <div className='card-body'>
+                                        <h3 className='card-title'>{post.title.rendered} </h3>
+                                        <h6 className='card-text'>Published on {post.date}</h6>
+                                        <Link href={'/posts/' + post.id}>
+                                            <button type="button" className="mt-2 btn btn-outline-info">Continue reading</button>
+                                        </Link>
+                                    </div>
                                 </div>
                             )
                         })

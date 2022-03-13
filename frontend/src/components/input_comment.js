@@ -53,34 +53,38 @@ const Input_Comment = ({ post, data_comments, ipAddress }) => {
             })
             .then(response => {
                 console.log(response)
-                window.location.reload() //for Reload Page after post comment
+                console.log(response.json())
+                // window.location.reload() //for Reload Page after post comment
             })
-            .then(json => console.log(json))
             .catch(err => console.log(err))
         }
     }
     
     return (
         <div>
+            <div className='card shadow p-3 mb-4 mt-4 bg-white rounded'>
             <h2>Reply Comment</h2>
-            <label className="form-label">Comment</label>
-            <div className="input-group mb-2">
-                <textarea className="form-control" type="text" onChange={e => setComment(e.target.value)}></textarea>
-            </div>
-            <label className="form-label">Name (optional)</label>
-            <div className="input-group mb-2">
-                <input className="form-control" type="text" onChange={e => setName(e.target.value)}></input>
-            </div>
-            <label className="form-label">Email (optional)</label>
-            <div className="input-group mb-2">
-                <input className="form-control" type="text" onChange={e => setEmail(e.target.value)}></input>
-            </div>
-            <label className="form-label">Website</label>
-            <div className="input-group mb-2">
-                <input className="form-control" type="text" onChange={e => setWebsite(e.target.value)}></input>
-            </div>
-            <div className="d-grid gap-2 mb-3">
-                <button type="button" className="btn btn-success" onClick={postComment}>Submit</button>
+                <div className='container'>
+                    <label className="form-label">Comment</label>
+                    <div className="input-group mb-2">
+                        <textarea className="form-control" type="text" rows="4" onChange={e => setComment(e.target.value)}></textarea>
+                    </div>
+                    <label className="form-label">Name (optional)</label>
+                    <div className="input-group mb-2">
+                        <input className="form-control" type="text" onChange={e => setName(e.target.value)}></input>
+                    </div>
+                    <label className="form-label">Email (optional)</label>
+                    <div className="input-group mb-2">
+                        <input className="form-control" type="text" onChange={e => setEmail(e.target.value)}></input>
+                    </div>
+                    <label className="form-label">Website (optional)</label>
+                    <div className="input-group mb-2">
+                        <input className="form-control" type="text" onChange={e => setWebsite(e.target.value)}></input>
+                    </div>
+                    <div className="d-grid gap-2 mb-3">
+                        <button type="button" className="btn btn-outline-success" onClick={postComment}>Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
     )

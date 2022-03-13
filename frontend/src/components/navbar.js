@@ -1,12 +1,16 @@
 import Link from "next/link"
 import { useContext, useState } from "react"
 import { TagContext } from "../../contexts/TagContext"
+import { CategoryContext } from "../../contexts/CategoryContext"
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
 const NavBar = () => {
     const navTags = useContext(TagContext)
     console.log('navTags : ', navTags)
     
+    const navCategory = useContext(CategoryContext)
+    console.log('navCategory: ', navCategory);
+
     return (
         <Navbar bg='dark' variant='dark' expand='lg'>
             <Container>
@@ -23,6 +27,19 @@ const NavBar = () => {
                                         // <NavDropdown.Item key={index} href={'/tag/' + item.id}>{ item.name }</NavDropdown.Item>
                                         <Link key={index} href={'/tag/' + item.id} >
                                             <NavDropdown.Item href={'/tag/' + item.id}>{ item.name }</NavDropdown.Item> 
+                                        </Link>
+                                    )
+                                })
+                            }
+                        </NavDropdown>
+                        <NavDropdown title="Categories">
+                            {
+                                !!navCategory &&
+                                navCategory.map((item, index) => {
+                                    return (
+                                        // <NavDropdown.Item key={index} href={'/tag/' + item.id}>{ item.name }</NavDropdown.Item>
+                                        <Link key={index} href={'/categories/' + item.id} >
+                                            <NavDropdown.Item href={'/categories/' + item.id}>{ item.name }</NavDropdown.Item> 
                                         </Link>
                                     )
                                 })
