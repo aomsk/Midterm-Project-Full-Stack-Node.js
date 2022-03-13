@@ -82,19 +82,6 @@ const Author = ({ posts, user }) => {
                         let local_time = new Date(post.date_gmt).toLocaleTimeString()
 
                         return (
-                            // <div className='col col-lg-12' key={index}>
-                            //     <div className='card shadow p-3 mb-5 bg-white rounded'>
-                            //         <div className='card-body'>
-                            //             <h4 className='card-title'>
-                            //                 <div dangerouslySetInnerHTML={{ __html: post.title.rendered }}></div>
-                            //             </h4>
-                            //             <div className='card-text'>{post_date}</div>
-                            //             <div className='container'>
-                            //                 <div dangerouslySetInnerHTML={{ __html: post.content.rendered }}></div>
-                            //             </div>
-                            //         </div>
-                            //     </div>
-                            // </div>
                             <div className="card shadow p-3 mb-3 mt-3 bg-white rounded" key={index}>
                                 <div className="card-body">
                                     <h3 className="card-title">{post.title.rendered}</h3>

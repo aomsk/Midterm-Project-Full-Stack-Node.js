@@ -3,6 +3,7 @@ import { TagContext } from '../../contexts/TagContext';
 import { CategoryContext } from '../../contexts/CategoryContext';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SSRProvider from 'react-bootstrap/SSRProvider';
 
 function MyApp({ Component, pageProps }) {
 
@@ -14,12 +15,14 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <div>
-            <TagContext.Provider value={navTags}>
-                <CategoryContext.Provider value={navCategory}>
-                    <Navbar />
-                    <Component {...pageProps} />
-                </CategoryContext.Provider>
-            </TagContext.Provider>
+            <SSRProvider>
+                <TagContext.Provider value={navTags}>
+                    <CategoryContext.Provider value={navCategory}>
+                        <Navbar />
+                        <Component {...pageProps} />
+                    </CategoryContext.Provider>
+                </TagContext.Provider>
+            </SSRProvider>
         </div>
     )
 }

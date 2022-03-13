@@ -90,11 +90,6 @@ const PostId = ({ post, authorData, data_comments, tags, categories, many_catego
     })
     console.log('categories_in_post: ', categories_in_post);
 
-    // const result = data_comments.filter((comment) => {
-    //     return post.id == comment.post
-    // }) // get comment ที่มี post_id ตรงกับ post  
-    // console.log('result : ', result)
-
     let local_date = new Date(post.date_gmt).toDateString()
     let local_time = new Date(post.date_gmt).toLocaleTimeString()
 
