@@ -42,10 +42,6 @@ export async function getStaticProps(context) {
     })
     const data_comments = await response_comments.json()
 
-    //IP Address
-    const response_ipAddress = await fetch('https://api.ipify.org/?format=json')
-    const ipAddress = await response_ipAddress.json()
-
     //tags
     const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
         method: 'GET',
@@ -65,8 +61,8 @@ export async function getStaticProps(context) {
             post: data,
             authorData: authorData,
             data_comments: data_comments,
-            ipAddress: ipAddress,
             tags: data_tags, //fecth for navbar navTags
+            many_categories: data_categories, //fecth for navbar navCategory
             categories: data_categories
         }
     }
@@ -77,12 +73,11 @@ import Link from 'next/link'
 import Input_Comment from '../../components/input_comment'
 import Card_Comment from '../../components/card_comment'
 
-const PostId = ({ post, authorData, data_comments, ipAddress, tags, categories }) => {
-    console.log('tags: ', tags);
-    console.log('categories: ', categories);
-    console.log('ipAddress: ', ipAddress);
-    console.log('authorData: ', authorData);
-    
+const PostId = ({ post, authorData, data_comments, tags, categories, many_categories }) => {
+    // console.log('tags: ', tags);
+    // console.log('categories: ', categories);
+    // console.log('authorData: ', authorData);
+
     //tags
     const tag_in_post = tags.filter((tag, index) => {
         return post.tags[index]
@@ -95,10 +90,10 @@ const PostId = ({ post, authorData, data_comments, ipAddress, tags, categories }
     })
     console.log('categories_in_post: ', categories_in_post);
 
-    const result = data_comments.filter((comment) => {
-        return post.id == comment.post
-    }) // get comment ที่มี post_id ตรงกับ post  
-    console.log('result : ', result)
+    // const result = data_comments.filter((comment) => {
+    //     return post.id == comment.post
+    // }) // get comment ที่มี post_id ตรงกับ post  
+    // console.log('result : ', result)
 
     let local_date = new Date(post.date_gmt).toDateString()
     let local_time = new Date(post.date_gmt).toLocaleTimeString()
@@ -149,7 +144,7 @@ const PostId = ({ post, authorData, data_comments, ipAddress, tags, categories }
                         <hr></hr>
                         <div dangerouslySetInnerHTML={{ __html: post.content.rendered }}></div>
                         <Card_Comment post={post} data_comments={data_comments} />
-                        <Input_Comment post={post} data_comments={data_comments} ipAddress={ipAddress} />
+                        <Input_Comment post={post} data_comments={data_comments} />
                     </div>
                 </div>
             </div>

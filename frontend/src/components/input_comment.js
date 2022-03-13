@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Input_Comment = ({ post, data_comments, ipAddress }) => {
+const Input_Comment = ({ post }) => {
 
     const [comment, setComment] = useState('')
     const [name, setName] = useState('')
@@ -10,34 +10,30 @@ const Input_Comment = ({ post, data_comments, ipAddress }) => {
     async function postComment() {
 
         let today = new Date();
-        console.log('today: ', today);
+        // console.log('today: ', today);
         let ISO_DATE = today.toISOString()
         let ISO_split = ISO_DATE.split('T')
         let local_time = today.toLocaleTimeString()
         let date_time = ISO_split[0] + 'T' + local_time
         console.log('รวม Date + Time: ', date_time);
 
-        // const get_id_comment =  data_comments[0].id
-        // const id_comment =  get_id_comment + 1
-        // console.log('id_comment: ', typeof(id_comment));
+        let random_ip = (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
+        console.log('random_ip : ', random_ip)
 
         if (comment == '') {
             alert("please fill the form")
         }
         else {
             let data = {
-                // "author": 0,
                 "author_email": email,
-                "author_ip": ipAddress.ip,
+                // "author_ip": random_ip,
                 "author_name": name,
                 "author_url": website,
-                // "author_user_agent": '',
                 "content": comment,
                 "date": date_time,
                 "date_gmt": date_time,
                 "parent": 0,
                 "post": post.id,
-                // "status": 'approved',
                 "meta": []
             }
     

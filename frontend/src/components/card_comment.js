@@ -1,10 +1,9 @@
 const Card_Comment = ({ post, data_comments }) => {
     const result = data_comments.filter((comment) => {
         return post.id == comment.post
-    })
+    })// get comment ที่มี post_id ตรงกับ post
     return (
         <div>
-            {/* <hr></hr> */}
             <h2>Comment ({result.length})</h2>
             {
                 result.map((item, index) => {
@@ -15,7 +14,7 @@ const Card_Comment = ({ post, data_comments }) => {
                             <div className='card-body'>
                                 <h4 className='card-title'>{item.author_name}</h4>
                                 <p className='card-text'>{comment_date} | {local_time}</p>
-                                <p className='card-text' dangerouslySetInnerHTML={{ __html: item.content.rendered }}></p>
+                                <div className='card-text' dangerouslySetInnerHTML={{ __html: item.content.rendered }}></div>
                             </div>
                         </div>
                     )
