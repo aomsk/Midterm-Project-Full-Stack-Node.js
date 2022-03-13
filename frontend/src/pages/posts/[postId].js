@@ -20,6 +20,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context
+    //post
     const response = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/posts/${params.postId}`, {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
@@ -34,51 +35,76 @@ export async function getStaticProps(context) {
     })
     const authorData = await responsse_author.json()
 
+    //comments
     const response_comments = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/comments`, {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
     })
     const data_comments = await response_comments.json()
 
-    const response_ipAddress = await fetch('https://api.ipify.org/?format=json')
-    const ipAddress = await response_ipAddress.json()
+    //tags
+    const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_tags = await responsse_tags.json()
+
+    //categories
+    const responsse_categories = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_categories = await responsse_categories.json()
 
     return {
         props: {
             post: data,
             authorData: authorData,
             data_comments: data_comments,
-            ipAddress: ipAddress
+            tags: data_tags, //fecth for navbar navTags
+            many_categories: data_categories, //fecth for navbar navCategory
+            categories: data_categories
         }
     }
 }
 
-import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 import Link from 'next/link'
 import Input_Comment from '../../components/input_comment'
 import Card_Comment from '../../components/card_comment'
 
-const PostId = ({ post, authorData, data_comments, ipAddress }) => {
-    console.log('ipAddress: ', ipAddress);
-    console.log('authorData: ', authorData);
+const PostId = ({ post, authorData, data_comments, tags, categories, many_categories }) => {
+    // console.log('tags: ', tags);
+    // console.log('categories: ', categories);
+    // console.log('authorData: ', authorData);
 
-    const result = data_comments.filter((comment) => {
-        return post.id == comment.post
-    }) // get comment ที่มี post_id ตรงกับ post  
-    console.log('result : ', result)
+    //tags
+    const tag_in_post = tags.filter((tag, index) => {
+        return post.tags[index]
+    })
+    console.log('tag_in_post: ', tag_in_post);
+
+    //categorise
+    const categories_in_post = categories.filter((category, index) => {
+        return post.categories[index]
+    })
+    console.log('categories_in_post: ', categories_in_post);
+
+    // const result = data_comments.filter((comment) => {
+    //     return post.id == comment.post
+    // }) // get comment ที่มี post_id ตรงกับ post  
+    // console.log('result : ', result)
 
     let local_date = new Date(post.date_gmt).toDateString()
     let local_time = new Date(post.date_gmt).toLocaleTimeString()
 
     return (
-        <Container>
+        <div className='container'>
             <Head>
                 <title>{post.title.rendered}</title>
             </Head>
-            <Row>
-                <Col>
-                    {/* <h4>Post ID : {post.id}</h4> */}
+            <div className='row'>
+                <div className='col'>
                     <div>
                         <h1>{post.title.rendered}</h1>
                         <h6>Author :&nbsp;
@@ -87,16 +113,42 @@ const PostId = ({ post, authorData, data_comments, ipAddress }) => {
                             </Link>
                         </h6>
                         <h6>Date : {local_date} | {local_time}</h6>
-                        <h6>Tag : {post.tags}</h6>
-                        <h6>Categories : {post.categories}</h6>
+                        <h6>Tag : </h6>
+                        <div>
+                        {
+                            tag_in_post.map((tag, index) => {
+                                return (
+                                    <div key={index}>
+                                        <Link href={'/tag/' + tag.id}>
+                                            <button type="button" className="btn btn-dark mb-2" style={{marginLeft: '30px', border: '1px solid', borderRadius: '5px'}}>{tag.name}</button>
+                                        </Link>
+                                    </div>
+                                )
+                            })
+                        }
+                        </div>
+                        <h6>Categories : </h6>
+                        <div>
+                        {
+                            categories_in_post.map((category, index) => {
+                                return (
+                                    <div key={index}>
+                                        <Link href={'/categories/' + category.id}>
+                                            <button type="button" className="btn btn-dark mb-2" style={{marginLeft: '30px', border: '1px solid', borderRadius: '5px'}}>{category.name}</button>
+                                        </Link>
+                                    </div>
+                                )
+                            })
+                        }
+                        </div>
+                        <hr></hr>
                         <div dangerouslySetInnerHTML={{ __html: post.content.rendered }}></div>
-                        {/* <hr></hr> */}
                         <Card_Comment post={post} data_comments={data_comments} />
-                        <Input_Comment post={post} data_comments={data_comments} ipAddress={ipAddress} />
+                        <Input_Comment post={post} data_comments={data_comments} />
                     </div>
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     )
 }
 

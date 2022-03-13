@@ -1,28 +1,24 @@
 import Navbar from '../components/navbar'
-import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
-import { config } from "@fortawesome/fontawesome-svg-core";
 import { TagContext } from '../../contexts/TagContext';
-// import { AuthorContext } from '../../contexts/AuthorContext';
+import { CategoryContext } from '../../contexts/CategoryContext';
 import { useState } from 'react';
-config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
-// import '../styles/scss/styles.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {
 
     const { tags } = pageProps
-    const [ navTags ] = useState(tags)
- 
-    // const { authorData } = pageProps
-    // const [ author ] = useState(authorData)
+    const [navTags] = useState(tags)
+
+    const { many_categories } = pageProps
+    const [navCategory] = useState(many_categories)
 
     return (
         <div>
             <TagContext.Provider value={navTags}>
-                {/* <AuthorContext.Provider value={author}> */}
+                <CategoryContext.Provider value={navCategory}>
                     <Navbar />
                     <Component {...pageProps} />
-                {/* </AuthorContext.Provider> */}
+                </CategoryContext.Provider>
             </TagContext.Provider>
         </div>
     )

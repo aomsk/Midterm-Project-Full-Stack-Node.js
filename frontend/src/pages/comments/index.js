@@ -11,54 +11,56 @@ export async function getStaticProps() {
     })
     const data_tags = await responsse_tags.json()
 
+    const responsse_many_categories = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_many_categories = await responsse_many_categories.json()
+
     return {
         props: {
             comments: data,
             tags: data_tags, //fecth for navbar navTags
+            many_categories: data_many_categories, //fecth for navbar navCategory
         }
     }
 }
 
-import { Container, Row, Col, Card, Button } from 'react-bootstrap'
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import Input_Comment from '../../components/input_comment'
 
-const allComments = (comments) => {
-    console.log('comments: ', comments.comments);
+const allComments = ({comments}) => {
+    console.log('comments: ', comments);
 
     return (
-        <Container>
+        <div className='container'>
             <Head>
                 <title>Comments</title>
             </Head>
-            {/* <h2>Create Comment</h2>
-            <Input_Comment /> */}
-            <h3>All Comments ({ comments.comments.length })</h3>
-            <Row>
-                <Col>
+            <h3>All Comments ({ comments.length })</h3>
+            <div className='row'>
+                <div className='col'>
                     {
-                        comments.comments.map((comment, index) => {
+                        comments.map((comment, index) => {
                             let comment_date = new Date(comment.date_gmt).toDateString()
                             let local_time = new Date(comment.date_gmt).toLocaleTimeString()
                             return (
-                                <Card className='mb-2' key={index}>
-                                    <Card.Body>
-                                        <Card.Title>{comment.author_name} From Post {comment.post}</Card.Title>
-                                        <Card.Text>Published on {comment_date} | {local_time}</Card.Text>
-                                        <div dangerouslySetInnerHTML={{ __html: comment.content.rendered }}></div>
+                                <div className='card shadow p-3 mb-4 bg-white rounded' key={index}>
+                                    <div className='card-body'>
+                                        <h4 className='card-title'>{comment.author_name}</h4>
+                                        <p className='card-text'>Published on {comment_date} | {local_time}</p>
+                                        <div className='card-text' dangerouslySetInnerHTML={{ __html: comment.content.rendered }}></div>
                                         <Link href={'/posts/' + comment.post}>
-                                            <div type='button' className='btn btn-outline-primary' variant="primary">Go To Post</div>
+                                            <button type='button' className='btn btn-outline-primary'>Go To Post</button>
                                         </Link>
-                                    </Card.Body>
-                                </Card>
+                                    </div>
+                                </div>
                             )
                         })
                     }
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     )
 }
 export default allComments

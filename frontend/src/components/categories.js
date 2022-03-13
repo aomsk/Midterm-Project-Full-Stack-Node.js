@@ -1,10 +1,8 @@
-import { Container, Row, Col } from 'react-bootstrap'
-
 const Categories = () => {
     return (
-        <Container className='mt-3'>
+        <div className='container mt-3'>
             <h3>Categories</h3>
-            <Row>
+            <div className="row">
                 {/* {
                     tags.map((tag, index) => {
                         return (
@@ -18,8 +16,8 @@ const Categories = () => {
                         )
                     })
                 } */}
-            </Row>
-        </Container>
+            </div>
+        </div>
     )
 }
 

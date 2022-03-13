@@ -1,6 +1,4 @@
 import Card_Post from '../components/card_post'
-// import Categories from '../components/categories'
-// import Tag from '../components/tag'
 import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
@@ -17,32 +15,32 @@ export async function getStaticProps() {
     })
     const data_tags = await responsse_tags.json()
 
+    //categories
+    const responsse_many_categories = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories', {
+        method: 'GET',
+        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+    })
+    const data_many_categories = await responsse_many_categories.json()
+
     return {
         props: {
             posts: data_posts,
             tags: data_tags,
+            many_categories: data_many_categories,
         }
     }
 }
 
-const Home = ({ posts, tags }) => {
+const Home = ({ posts, tags, many_categories }) => {
     return (
-        <Container>
+        <div className='container'>
             <Head>
                 <title>Home</title>
             </Head>
-            {/* <Row>
-                <Col>
-                    <Tag tags={tags} />
-                </Col>
-                <Col>
-                    <Categories />
-                </Col>
-            </Row> */}
-            <Row>
+            <div className='row'>
                 <Card_Post posts={posts} />
-            </Row>
-        </Container>
+            </div>
+        </div>
     )
 }
 
