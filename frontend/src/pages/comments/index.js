@@ -1,4 +1,4 @@
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const responsse = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/comments`, {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
@@ -23,7 +23,7 @@ export async function getStaticProps() {
             tags: data_tags, //fecth for navbar navTags
             many_categories: data_many_categories, //fecth for navbar navCategory
         },
-        revalidate: 10
+        // revalidate: 10
     }
 }
 
