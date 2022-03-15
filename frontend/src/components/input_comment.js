@@ -48,9 +48,9 @@ const Input_Comment = ({ post }) => {
                 body: JSON.stringify(data),
             })
             .then(response => {
+                alert('Create comment completed')
                 console.log(response)
                 console.log(response.json())
-                alert('Create comment completed')
                 // window.location.reload() //for Reload Page after post comment
             })
             .catch(err => console.log(err))
