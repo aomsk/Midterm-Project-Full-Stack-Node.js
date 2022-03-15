@@ -1,24 +1,24 @@
-export async function getStaticPaths() {
-    const response = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/posts', {
-        method: 'GET',
-        headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
-    })
-    const data = await response.json()
-    const paths = data.map((post) => {
-        return {
-            params: {
-                postId: post.id.toString(),
-            }
-        }
-    })
+// export async function getStaticPaths() {
+//     const response = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/posts', {
+//         method: 'GET',
+//         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
+//     })
+//     const data = await response.json()
+//     const paths = data.map((post) => {
+//         return {
+//             params: {
+//                 postId: post.id.toString(),
+//             }
+//         }
+//     })
 
-    return {
-        paths,
-        fallback: false,
-    }
-}
+//     return {
+//         paths,
+//         fallback: false,
+//     }
+// }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const { params } = context
     //post
     const response = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/posts/${params.postId}`, {
@@ -65,7 +65,7 @@ export async function getStaticProps(context) {
             many_categories: data_categories, //fecth for navbar navCategory
             categories: data_categories
         },
-        revalidate: 1
+        // revalidate: 10
     }
 }
 
