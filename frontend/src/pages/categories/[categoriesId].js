@@ -29,12 +29,14 @@ export async function getStaticProps(context) {
     })
     const data_categories = await responsse_categories.json()
 
+    //posts
     const responsse_posts = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/posts', {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
     })
     const data_posts = await responsse_posts.json()
 
+    //tags
     const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
@@ -88,8 +90,8 @@ const categoriesId = ({ posts, categories, tags }) => {
                     <h2>Categories : {categories.name} ({categories.count})</h2>
                     {
                         post_in_categories.map((post, index) => {
-                            let post_date = new Date(post.date_gmt).toDateString()
-                            let local_time = new Date(post.date_gmt).toLocaleTimeString()
+                            let post_date = new Date(post.date).toDateString()
+                            let local_time = new Date(post.date).toLocaleTimeString()
                             return (
                                 <div className="card shadow p-3 mb-3 mt-3 bg-white rounded" key={index}>
                                     <div className="card-body">

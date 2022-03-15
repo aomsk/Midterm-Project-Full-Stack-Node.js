@@ -13,7 +13,7 @@ const Card_Post = ({ posts }) => {
                                 <div className="card shadow p-3 mb-5 bg-white rounded">
                                     <div className='card-body'>
                                         <h5 className='card-title'>{ post.title.rendered }</h5>
-                                        <div className='card-text mb-4'>Published on { post_date } | { local_time }</div>
+                                        <p className='card-text mb-4'>Published on { post_date } | { local_time }</p>
                                         <Link href={'/posts/' + post.id}>
                                             <button type="button" className='btn btn-outline-secondary'>Read More</button>
                                         </Link>

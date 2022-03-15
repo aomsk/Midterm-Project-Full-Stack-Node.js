@@ -26,6 +26,7 @@ export async function getStaticProps(context) {
     })
     const data_posts = await responsse_posts.json()
 
+    //users
     const responsse_user = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/users/${params.authorId}`, {
         method: 'GET',
         headers: {
@@ -35,12 +36,14 @@ export async function getStaticProps(context) {
     })
     const data_user = await responsse_user.json()
 
+    //tags
     const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
     })
     const data_tags = await responsse_tags.json()
 
+    //categories
     const responsse_many_categories = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories', {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }

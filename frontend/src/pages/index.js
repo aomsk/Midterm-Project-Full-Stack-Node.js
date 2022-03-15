@@ -1,5 +1,4 @@
 import Card_Post from '../components/card_post'
-import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
 export async function getStaticProps() {
@@ -9,6 +8,7 @@ export async function getStaticProps() {
     })
     const data_posts = await responsse_posts.json()
 
+    //tags
     const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
@@ -25,8 +25,8 @@ export async function getStaticProps() {
     return {
         props: {
             posts: data_posts,
-            tags: data_tags,
-            many_categories: data_many_categories,
+            tags: data_tags, //fecth for navbar navTags
+            many_categories: data_many_categories, //fecth for navbar navCategory
         },
     }
 }

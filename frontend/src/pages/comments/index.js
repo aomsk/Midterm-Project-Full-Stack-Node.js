@@ -5,12 +5,14 @@ export async function getServerSideProps() {
     })
     const data = await responsse.json()
 
+    //tags
     const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
     })
     const data_tags = await responsse_tags.json()
 
+    //categories
     const responsse_many_categories = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories', {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }

@@ -24,12 +24,14 @@ export async function getStaticProps(context) {
     })
     const data = await responsse.json()
     
+    //posts
     const responsse_post = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/posts/`, {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
     })
     const data_post = await responsse_post.json()
 
+    //tags
     const responsse_tags = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/tags', {
         method: 'GET',
         headers: { 'Authorization': 'Basic ZnN3ZDpmc3dkLWNtcw==' }
@@ -88,11 +90,13 @@ const TagId = ({ tag, posts, tags }) => {
                 <h2>Tag : {tag.name} ({tag.count})</h2>
                     {
                         post_in_tag.map((post, index) => {
+                            let post_date = new Date(post.date).toDateString()
+                            let local_time = new Date(post.date).toLocaleTimeString()
                             return (
                                 <div className='card shadow p-3 mb-3 mt-3 bg-white rounded' key={index}>
                                     <div className='card-body'>
                                         <h3 className='card-title'>{post.title.rendered} </h3>
-                                        <h6 className='card-text'>Published on {post.date}</h6>
+                                        <p className='card-text'>Published on {post_date} | {local_time}</p>
                                         <Link href={'/posts/' + post.id}>
                                             <button type="button" className="mt-2 btn btn-outline-info">Continue reading</button>
                                         </Link>

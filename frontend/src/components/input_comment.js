@@ -17,8 +17,8 @@ const Input_Comment = ({ post }) => {
         let date_time = ISO_split[0] + 'T' + local_time
         console.log('รวม Date + Time: ', date_time);
 
-        let random_ip = (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
-        console.log('random_ip : ', random_ip)
+        // let random_ip = (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
+        // console.log('random_ip : ', random_ip)
 
         if (comment == '') {
             alert("please fill the form")
