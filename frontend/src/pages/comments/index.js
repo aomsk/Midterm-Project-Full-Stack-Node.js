@@ -42,8 +42,8 @@ const allComments = ({comments}) => {
                 <div className='col'>
                     {
                         comments.map((comment, index) => {
-                            let comment_date = new Date(comment.date_gmt).toDateString()
-                            let local_time = new Date(comment.date_gmt).toLocaleTimeString()
+                            let comment_date = new Date(comment.date).toDateString()
+                            let local_time = new Date(comment.date).toLocaleTimeString()
                             return (
                                 <div className='card shadow p-3 mb-4 bg-white rounded' key={index}>
                                     <div className='card-body'>

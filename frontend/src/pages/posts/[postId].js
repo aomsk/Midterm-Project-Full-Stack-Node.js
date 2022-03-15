@@ -111,29 +111,39 @@ const PostId = ({ post, authorData, data_comments, tags, categories, many_catego
                         <h6>Tag : </h6>
                         <div>
                         {
-                            tag_in_post.map((tag, index) => {
-                                return (
-                                    <div key={index}>
-                                        <Link href={'/tag/' + tag.id}>
-                                            <button type="button" className="btn btn-dark mb-2" style={{marginLeft: '30px', border: '1px solid', borderRadius: '5px'}}>{tag.name}</button>
-                                        </Link>
+                            tag_in_post.length > 0 ?
+                                tag_in_post.map((tag, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <Link href={'/tag/' + tag.id}>
+                                                <button type="button" className="btn btn-dark mb-2" style={{marginLeft: '30px', border: '1px solid', borderRadius: '5px'}}>{tag.name}</button>
+                                            </Link>
+                                        </div>
+                                    )
+                                })
+                            :
+                                    <div style={{marginLeft: '30px'}}>
+                                        <h6>No Tags</h6>
                                     </div>
-                                )
-                            })
                         }
                         </div>
                         <h6>Categories : </h6>
                         <div>
                         {
-                            categories_in_post.map((category, index) => {
-                                return (
-                                    <div key={index}>
-                                        <Link href={'/categories/' + category.id}>
-                                            <button type="button" className="btn btn-dark mb-2" style={{marginLeft: '30px', border: '1px solid', borderRadius: '5px'}}>{category.name}</button>
-                                        </Link>
+                            categories_in_post.length > 0 ?
+                                categories_in_post.map((category, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <Link href={'/categories/' + category.id}>
+                                                <button type="button" className="btn btn-dark mb-2" style={{marginLeft: '30px', border: '1px solid', borderRadius: '5px'}}>{category.name}</button>
+                                            </Link>
+                                        </div>
+                                    )
+                                })
+                            :
+                                    <div style={{ marginLeft: '30px' }}>
+                                        <h6>No Categories</h6>
                                     </div>
-                                )
-                            })
                         }
                         </div>
                         <hr></hr>
