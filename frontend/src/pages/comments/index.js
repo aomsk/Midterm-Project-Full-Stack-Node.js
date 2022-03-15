@@ -22,7 +22,8 @@ export async function getStaticProps() {
             comments: data,
             tags: data_tags, //fecth for navbar navTags
             many_categories: data_many_categories, //fecth for navbar navCategory
-        }
+        },
+        revalidate: 10
     }
 }
 

@@ -64,7 +64,8 @@ export async function getStaticProps(context) {
             tags: data_tags, //fecth for navbar navTags
             many_categories: data_categories, //fecth for navbar navCategory
             categories: data_categories
-        }
+        },
+        revalidate: 10
     }
 }
 

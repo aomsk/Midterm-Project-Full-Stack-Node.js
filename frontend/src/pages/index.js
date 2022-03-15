@@ -27,7 +27,7 @@ export async function getStaticProps() {
             posts: data_posts,
             tags: data_tags,
             many_categories: data_many_categories,
-        }
+        },
     }
 }
 
