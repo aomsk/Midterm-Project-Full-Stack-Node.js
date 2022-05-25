@@ -4,7 +4,7 @@ import { CategoryContext } from '../../contexts/CategoryContext';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SSRProvider from 'react-bootstrap/SSRProvider';
-
+import styles from '../styles/globals.css'
 function MyApp({ Component, pageProps }) {
 
     const { tags } = pageProps
@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
     const [navCategory] = useState(many_categories)
 
     return (
-        <div>
+        <div style={styles}>
             <SSRProvider>
                 <TagContext.Provider value={navTags}>
                     <CategoryContext.Provider value={navCategory}>

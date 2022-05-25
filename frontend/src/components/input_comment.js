@@ -10,11 +10,15 @@ const Input_Comment = ({ post }) => {
     async function postComment() {
 
         let today = new Date();
-        // console.log('today: ', today);
+        console.log('today: ', today);
+        
         let ISO_DATE = today.toISOString()
+        console.log('ISO_DATE: ', ISO_DATE);
+
         let ISO_split = ISO_DATE.split('T')
         let local_time = today.toLocaleTimeString()
         let date_time = ISO_split[0] + 'T' + local_time
+
         console.log('รวม Date + Time: ', date_time);
 
         // let random_ip = (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
